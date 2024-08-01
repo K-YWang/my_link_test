@@ -1,3 +1,8 @@
+# author: wyyy
+# date: 2024/07/26
+# desc: 该文件主要实现了一些常用的网络相似性指标，包括Common_neighbors, Jaccard, Salton等
+# 原理的详情参考info文件夹下的指标图片
+
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 
@@ -63,5 +68,157 @@ class IndexAll:
         return jaccard_similarities
 
 
-    def Adamic_Adar(self):
-        pass
+    def sSalton(self):
+        #计算Salton指标
+
+        #计算共同邻居数
+        sim = np.dot(self.matrix , self.matrix)
+
+        res_mid = np.zeros(sim.shape)
+        
+        degree = np.sum(self.matrix, axis=1) # 求每个节点的度
+        res_mid = np.sqrt(np.outer(degree, degree)) # 求每个节点的度的乘积的开方
+
+        with np.errstate(divide='ignore', invalid='ignore'):
+            salton_similarity = np.divide(sim, res_mid)
+            salton_similarity[np.isnan(salton_similarity)] = 0  # 将NaN值替换为0
+
+        return salton_similarity
+    
+
+    def sHPI(self):
+        #计算sHPI指标
+        #计算共同邻居数
+        sim = np.dot(self.matrix , self.matrix)
+
+        res_mid = np.zeros(sim.shape)
+        degree = np.sum(self.matrix, axis=1)
+        res_mid = np.minimum(degree[:, None], degree[None, :])
+
+        with np.errstate(divide='ignore', invalid='ignore'):
+            shpi_similarity = np.divide(sim, res_mid)
+            shpi_similarity[np.isnan(shpi_similarity)] = 0
+
+        return shpi_similarity
+    
+
+    def sHDI(self):
+        #计算sHDI指标
+        #计算共同邻居数
+        sim = np.dot(self.matrix , self.matrix)
+
+        res_mid = np.zeros(sim.shape)
+        degree = np.sum(self.matrix, axis=1)
+        res_mid = np.maximum(degree[:, None], degree[None, :])
+
+        with np.errstate(divide='ignore', invalid='ignore'):
+            shdi_similarity = np.divide(sim, res_mid)
+            shdi_similarity[np.isnan(shdi_similarity)] = 0
+
+        return shdi_similarity
+    
+
+    def sLLHN(self):
+        #计算sLLHN指标
+        #计算共同邻居数
+        sim = np.dot(self.matrix , self.matrix)
+
+        res_mid = np.zeros(sim.shape)
+        degree = np.sum(self.matrix, axis=1)
+        res_mid = np.outer(degree, degree)
+
+        with np.errstate(divide='ignore', invalid='ignore'):
+            sllhn_similarity = np.divide(sim, res_mid)
+            sllhn_similarity[np.isnan(sllhn_similarity)] = 0
+
+        return sllhn_similarity
+    
+
+    def sAA(self):
+        # sAA指标对AA指标进行了对称处理，使得它不仅考虑两个节点之间的共同邻居，还考虑这些邻居的稀有性，同时考虑两个节点自身的度数对相似性的影响。
+        #计算sAA指标
+        #计算共同邻居数
+        sim = np.dot(self.matrix , self.matrix)
+
+        degree = np.sum(self.matrix , axis = 1)
+        sAA_similarity = np.zeros(sim.shape)
+
+        for i in range(self.matrix.shape[0]):
+            for j in range(i, self.matrix.shape[1]):
+
+                common_neighbors = np.intersect1d(np.where(self.matrix[i] == 1)[0], np.where(self.matrix[j] == 1)[0])
+
+                if(len(common_neighbors) > 0):
+                    sAA_num = np.sum(1 / np.log(degree[common_neighbors]))
+
+                else:
+                    sAA_num = 0
+                
+                sAA_similarity[i][j] = sAA_num
+                sAA_similarity[j][i] = sAA_num
+        
+        return sAA_similarity
+    
+    def sRA(self):
+        #计算sRA指标
+        #计算共同邻居数
+        sim = np.dot(self.matrix , self.matrix)
+
+        degree = np.sum(self.matrix , axis = 1)
+        sRA_similarity = np.zeros(sim.shape)
+
+        for i in range(self.matrix.shape[0]):
+            for j in range(i, self.matrix.shape[1]):
+
+                common_neighbors = np.intersect1d(np.where(self.matrix[i] == 1)[0], np.where(self.matrix[j] == 1)[0])
+
+                if(len(common_neighbors) > 0):
+                    sRA_num = np.sum(1 / degree[common_neighbors])
+
+                else:
+                    sRA_num = 0
+                
+                sRA_similarity[i][j] = sRA_num
+                sRA_similarity[j][i] = sRA_num
+        
+        return sRA_similarity
+    
+
+    def sPA(self):
+        # sPA指标对PA指标进行了对称处理，使得它不仅考虑两个节点之间的共同邻居，还考虑这些邻居的稀有性，同时考虑两个节点自身的度数对相似性的影响。
+        #计算sPA指标
+        #计算共同邻居数
+        sim = np.dot(self.matrix , self.matrix)
+
+        degree = np.sum(self.matrix , axis = 1)
+        sPA_similarity = np.outer(degree, degree)
+
+        return sPA_similarity
+    
+
+    def sRandomWalk(self, C=0.85, max_iter=100, tol=1e-6):
+        num_nodes = self.matrix.shape[0]
+        P = np.zeros_like(self.matrix, dtype=float)
+        
+        # 构建转移概率矩阵P
+        for i in range(num_nodes):
+            row_sum = np.sum(self.matrix[i])
+            if row_sum > 0:
+                P[i] = self.matrix[i] / row_sum
+        
+        # print(P)
+
+        # 初始化相似度矩阵
+        sim = np.eye(num_nodes)
+        
+        # 迭代计算相似度矩阵
+        for _ in range(max_iter):
+            new_sim = C * np.dot(P, sim) + (1 - C) * np.eye(num_nodes)
+            
+            # 检查收敛
+            if np.linalg.norm(new_sim - sim) < tol:
+                break
+            
+            sim = new_sim
+        
+        return sim
