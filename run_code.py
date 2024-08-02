@@ -1,3 +1,6 @@
+# author: Wwwy
+# date: 2024/08/02
+
 from utils.NewIndex import NewIndex as Ni
 import networkx as nx
 
