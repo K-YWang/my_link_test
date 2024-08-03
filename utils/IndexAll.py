@@ -146,11 +146,11 @@ class IndexAll:
         for i in range(self.matrix.shape[0]):
             for j in range(i, self.matrix.shape[1]):
 
-                common_neighbors = np.intersect1d(np.where(self.matrix[i] == 1)[0], np.where(self.matrix[j] == 1)[0])
+                common_neighbors = np.intersect1d(np.where(self.matrix[i] > 0)[0], np.where(self.matrix[j] > 0)[0])
 
                 if(len(common_neighbors) > 0):
                     sAA_num = np.sum(1 / np.log(degree[common_neighbors]))
-
+                    
                 else:
                     sAA_num = 0
                 
