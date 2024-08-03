@@ -1,4 +1,4 @@
-# author: wyyy
+# author: Wwwy
 # date: 2024/07/26
 # desc: 该文件主要实现了一些常用的网络相似性指标，包括Common_neighbors, Jaccard, Salton等
 # 原理的详情参考info文件夹下的指标图片

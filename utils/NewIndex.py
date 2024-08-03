@@ -1,4 +1,4 @@
-# author: wyyy
+# author: Wwwy
 # date: 2024/07/26
 # desc: 该文件主要实现了一些新的网络相似性指标
 import numpy as np
