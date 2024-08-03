@@ -40,7 +40,7 @@ for edge in train_data:
 
 # 实例化一个NewIndex对象，并训练sAA指标
 Tindex = Ia(adjacent_matrix)
-sAA_sim = Tindex.Common_neighbors()
+sAA_sim = Tindex.sRA()
 
 
 # 计算得分
@@ -65,7 +65,7 @@ for node1, node2, score in scores:
     else:
         y_true.append(0)
 
-np.savetxt('data/show_res.txt', y_true , delimiter=',', fmt='%d')
+np.savetxt('data/show_res.txt', scores , delimiter=',', fmt='%d')
 precision, recall, _ = precision_recall_curve(y_true, y_scores)
 auc_roc = roc_auc_score(y_true, y_scores)
 

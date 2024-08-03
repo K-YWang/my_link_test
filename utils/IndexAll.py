@@ -37,8 +37,11 @@ class IndexAll:
                 res_sim[j][i] = logical_or_count
 
                 
-        sim = np.divide(sim, res_sim)
+        with np.errstate(divide='ignore', invalid='ignore'):
+            sim = np.divide(sim, res_sim)
+            sim[np.isnan(sim)] = 0  # 将NaN值替换为0
 
+        return sim
             # 将邻接矩阵转换为布尔类型
         # bool_matrix = self.matrix.astype(bool)
         # print(bool_matrix)
@@ -52,20 +55,20 @@ class IndexAll:
         # return jaccard_similarities
 
         # 将邻接矩阵转换为布尔类型
-        bool_matrix = self.matrix.astype(bool)
+        # bool_matrix = self.matrix.astype(bool)
 
-        # 计算交集
-        intersection = np.dot(self.matrix, self.matrix)
+        # # 计算交集
+        # intersection = np.dot(self.matrix, self.matrix)
 
-        # 计算并集
-        union = np.bitwise_or(bool_matrix[:, None], bool_matrix[None, :]).sum(axis=0)
+        # # 计算并集
+        # union = np.bitwise_or(bool_matrix[:, None], bool_matrix[None, :]).sum(axis=0)
 
-        # print(union)
+        # # print(union)
 
-        # 计算Jaccard相似性
-        jaccard_similarities = intersection / union
+        # # 计算Jaccard相似性
+        # jaccard_similarities = intersection / union
 
-        return jaccard_similarities
+        # return jaccard_similarities
 
 
     def sSalton(self):
