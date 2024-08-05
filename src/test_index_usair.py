@@ -10,7 +10,7 @@ import re
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_curve, roc_auc_score
 
-file_path = "data/USair.txt"
+file_path = "data/data_set/USair.txt"
 rf = Rff(file_path)
 vertex_dict, edges_list = rf.readUSair()
 vertex_num = len(vertex_dict)
@@ -22,8 +22,8 @@ vertex_num = len(vertex_dict)
 all_matrix = np.zeros((len(vertex_dict) + 1, len(vertex_dict) + 1))
 for edge in edges_list:
     node1, node2, weight = edge
-    all_matrix[node1][node2] = weight
-    all_matrix[node2][node1] = weight
+    all_matrix[node1][node2] = 1
+    all_matrix[node2][node1] = 1
 
 train_data , test_data = train_test_split(edges_list, test_size=0.2, random_state=42)
 # 使用集合存储训练集边
@@ -35,8 +35,8 @@ test_data_set = set((min(edge[0], edge[1]), max(edge[0], edge[1])) for edge in t
 adjacent_matrix = np.zeros((len(vertex_dict) + 1, len(vertex_dict) + 1))
 for edge in train_data:
     node1, node2, weight = edge
-    adjacent_matrix[node1][node2] = weight
-    adjacent_matrix[node2][node1] = weight
+    adjacent_matrix[node1][node2] = 1
+    adjacent_matrix[node2][node1] = 1
 
 # 实例化一个NewIndex对象，并训练sAA指标
 Tindex = Ia(adjacent_matrix)
