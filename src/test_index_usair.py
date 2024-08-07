@@ -1,6 +1,7 @@
 from utils.NewIndex import NewIndex as Ni
 from utils.IndexAll import IndexAll as Ia
 from utils.ReadFile import ReadFile as Rff
+from utils.roc_auc import roc_auc as Ra
 
 import networkx as nx
 import numpy as np
@@ -69,6 +70,12 @@ np.savetxt('data/show_res.txt', scores , delimiter=',', fmt='%d')
 precision, recall, _ = precision_recall_curve(y_true, y_scores)
 auc_roc = roc_auc_score(y_true, y_scores)
 
-print(f"precision: {precision}")
-print(f"recall: {recall}")
+Score = Ra(y_true, y_scores)
+Score.get_roc()
+
+print("auc_scores:" , Score.get_auc())
+
+
+# print(f"precision: {precision}")
+# print(f"recall: {recall}")
 print(f"AUC-ROC: {auc_roc}")
