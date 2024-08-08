@@ -12,8 +12,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_curve, roc_auc_score
 
 file_path = "data/data_set/USair.txt"
-rf = Rff(file_path)
-vertex_dict, edges_list = rf.readUSair()
+rf = Rff()
+vertex_dict, edges_list = rf.readUSair(file_path)
 vertex_num = len(vertex_dict)
 
 # 将二维数组写入CSV文件

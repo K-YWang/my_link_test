@@ -2,10 +2,9 @@ import sys
 import re
 
 class ReadFile:
-    def __init__(self, file_path):
-        self.file_path = file_path
-
-    def readUSair(self):
+    def __init__(self):
+        pass
+    def readUSair(self,file_path):
         
         # 用于存储点ID与名字的对应关系
         vertex_dict = {}
@@ -17,7 +16,7 @@ class ReadFile:
         parsing_vertices = False
         parsing_edges = False
 
-        with open(self.file_path, 'r') as file:
+        with open(file_path, 'r') as file:
             for line in file:
                 line = line.strip()
                 if not line:
@@ -60,3 +59,39 @@ class ReadFile:
 
 
         return vertex_dict, edges_list
+    
+    def readnet(self , file_path):
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+        nodes = []
+        edges = []
+        reading_nodes = False
+        reading_edges = False
+        
+        for line in lines:
+            line = line.strip()
+
+            if line.startswith('*vertices'):
+                reading_nodes = True
+                reading_edges = False
+                continue
+            elif line.startswith('*edges') or line.startswith('*arcs'):
+                reading_nodes = False
+                reading_edges = True
+                continue
+            
+
+            if reading_nodes:
+                parts = line.split()
+                node_id = int(parts[0])
+                node_label = parts[1].strip('"')
+                nodes.append((node_id, node_label))
+            
+            if reading_edges:
+                parts = line.split()
+                node1 = int(parts[0])
+                node2 = int(parts[1])
+                weight = float(parts[2]) if len(parts) > 2 else 1.0
+                edges.append((node1, node2, weight))
+        
+        return nodes, edges
