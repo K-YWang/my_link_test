@@ -4,46 +4,47 @@
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from itertools import combinations
+import networkx as nx
+
 
 class NewIndex:
     def __init__(self, matrix):
         self.matrix = matrix
     
-    def CNDP(self):
+    def CNDP(self , bate):
         num_nodes = self.matrix.shape[0]
-        sim = np.dot(self.matrix, self.matrix) # 计算共同邻居数
+        cndp_sim = np.zeros((num_nodes + 1, num_nodes + 1))
 
-        cndp_res = np.zeros(sim.shape)
+        # 计算聚类系数
+        G = nx.from_numpy_array(self.matrix)
+        cluster_coefficient = nx.clustering(G)
 
-        cndp_score = 0.0
+        # print(f"cluster_coefficient: {cluster_coefficient}")
+        average_cluster_coefficient = np.mean(list(cluster_coefficient.values()))
 
-        for i in range(num_nodes):
+        for i in range(1 , num_nodes):
             for j in range(i + 1 , num_nodes):
-                common_neighbors = np.intersect1d(np.where(self.matrix[i] == 1)[0], np.where(self.matrix[j] == 1)[0])
+                common_neighbors = np.where((self.matrix[i] > 0) & (self.matrix[j] > 0))[0]
+                CNDP_value = 0
+                # print(f"{i} , {j} , common_neighbors: {common_neighbors}")
 
-                if len(common_neighbors) >= 2:
-                     # 计算共同邻居之间的实际连接数
-                    actual_edges = 0
-                    for u, v in combinations(common_neighbors, 2):
-                        if self.matrix[u, v] == 1:
-                            actual_edges += 1
-
-                    # 计算可能的最大连接数
-                    max_possible_edges = len(common_neighbors) * (len(common_neighbors) - 1) / 2
-
-                    # 计算CNDP分数
-                    if max_possible_edges > 0:
-                        cndp_score = actual_edges / max_possible_edges
-                    else:
-                        cndp_score = 0
-
+                if len(common_neighbors) == 0:
+                    CNDP_value = 0
                 else:
-                    cndp_score = 0
+                    for node in common_neighbors:
+                        neighbors = np.where(self.matrix[node] > 0)[0]
+
+                        intersection = set(set(neighbors) | set(common_neighbors))
+
+                        # print(f"node: {node} , neighbors: {neighbors} , intersection: {intersection}")
+
+                        CNDP_value += len(intersection) * (len(neighbors) ** (-bate * average_cluster_coefficient))
                 
-
-                cndp_res[i][j] = cndp_score
-                cndp_res[j][i] = cndp_score   # 对称
-
-        return cndp_res
+                cndp_sim[i][j] = CNDP_value
+                cndp_sim[j][i] = CNDP_value
+        
+        return cndp_sim
+    
+                        
 
 

@@ -41,7 +41,10 @@ for edge in train_data:
 
 # 实例化一个NewIndex对象，并训练sAA指标
 Tindex = Ia(adjacent_matrix)
-sAA_sim = Tindex.sRA()
+Nindex = Ni(adjacent_matrix)
+
+
+sAA_sim = Nindex.CNDP(1)
 
 
 # 计算得分
