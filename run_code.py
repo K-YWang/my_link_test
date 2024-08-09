@@ -22,7 +22,8 @@ file_name_list = ["BUP" , "ADV" , "CDM" , "CEG" , "CGS" ,
                   "YST" , "ZWL"]
 
 base_path = "data/datasets"
-test_list = ["UAL" , "BUP"]
+# test_list = ["UAL" , "BUP" , "CEG" , "EML" , "INF"]
+test_list = ["UAL" , "BUP" , "CEG" , "INF"]
 
 output_path = "data/show_res.txt"
 
@@ -75,8 +76,12 @@ with open(output_path , "a") as file:
             for name , method in methods:
                 if(name == "__init__"):
                     continue
+                
+                elif name == "CNDP":
+                    sim = method(1)
+                else:
+                    sim = method()
 
-                sim = method()
                 # print(f"Running {name} on {dataset}")
                 file.write(f"Running {name} on {dataset}\n")
 
@@ -92,8 +97,18 @@ with open(output_path , "a") as file:
 
                 y_true = []
                 y_scores = []
+                y_pred = []
 
+                len1 = len(scores) / 5
+                cnt = 0
                 for node1, node2, score in scores:
+                    if cnt < len1:
+                        y_pred.append(1)
+                        cnt += 1
+                    else:
+                        y_pred.append(0)
+                    
+
                     y_scores.append(score)
 
                     if test_matrix[node1][node2] == 1:
@@ -102,17 +117,16 @@ with open(output_path , "a") as file:
                         y_true.append(0)
 
                 # 计算roc_auc
-                precision, recall, _ = precision_recall_curve(y_true, y_scores)
-                auc_roc = roc_auc_score(y_true, y_scores)
+                precision, recall, _ = precision_recall_curve(y_true, y_pred)
 
-                # print(f"dataset: {dataset} , auc_roc: {auc_roc}")
-                # print('\n')
+
+                auc_roc = roc_auc_score(y_true, y_scores)
 
                 file.write(f"dataset: {dataset} , auc_roc: {auc_roc}\n\n")
 
                 if name not in m:
                     m[name] = []
-                m[name].append(auc_roc)
+                m[name].append(recall)
 
             # print(f"success - {dataset}")
             file.write(f"success - {dataset}\n")
@@ -129,5 +143,6 @@ with open(output_path , "a") as file:
     df = df.T
     print(df)
 
+    df.to_csv("data/show_res.csv")
     print("done")
     file.write("done\n")

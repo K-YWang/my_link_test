@@ -1,3 +1,6 @@
+Running CNDP on UAL
+dataset: UAL , auc_roc: 0.9170239568167555
+
 Running Common_neighbors on UAL
 dataset: UAL , auc_roc: 0.9321321371368435
 
@@ -29,6 +32,9 @@ Running sSalton on UAL
 dataset: UAL , auc_roc: 0.9064177568249329
 
 success - UAL
+Running CNDP on UAL
+dataset: UAL , auc_roc: 0.9085984141479386
+
 Running Common_neighbors on UAL
 dataset: UAL , auc_roc: 0.9193280842818005
 
@@ -60,6 +66,9 @@ Running sSalton on UAL
 dataset: UAL , auc_roc: 0.8937618549123548
 
 success - UAL
+Running CNDP on UAL
+dataset: UAL , auc_roc: 0.9188089404637282
+
 Running Common_neighbors on UAL
 dataset: UAL , auc_roc: 0.9336908479408423
 
@@ -91,6 +100,9 @@ Running sSalton on UAL
 dataset: UAL , auc_roc: 0.9025962981936431
 
 success - UAL
+Running CNDP on UAL
+dataset: UAL , auc_roc: 0.9091817716105753
+
 Running Common_neighbors on UAL
 dataset: UAL , auc_roc: 0.9234352406619595
 
@@ -122,6 +134,9 @@ Running sSalton on UAL
 dataset: UAL , auc_roc: 0.8960002004588279
 
 success - UAL
+Running CNDP on UAL
+dataset: UAL , auc_roc: 0.9191308550682675
+
 Running Common_neighbors on UAL
 dataset: UAL , auc_roc: 0.930516805131746
 
@@ -153,6 +168,9 @@ Running sSalton on UAL
 dataset: UAL , auc_roc: 0.8990050337439027
 
 success - UAL
+Running CNDP on BUP
+dataset: BUP , auc_roc: 0.8742508803624878
+
 Running Common_neighbors on BUP
 dataset: BUP , auc_roc: 0.8817930067988834
 
@@ -184,6 +202,9 @@ Running sSalton on BUP
 dataset: BUP , auc_roc: 0.875821317196899
 
 success - BUP
+Running CNDP on BUP
+dataset: BUP , auc_roc: 0.8066642214131753
+
 Running Common_neighbors on BUP
 dataset: BUP , auc_roc: 0.822411201072289
 
@@ -215,6 +236,9 @@ Running sSalton on BUP
 dataset: BUP , auc_roc: 0.8165086308391748
 
 success - BUP
+Running CNDP on BUP
+dataset: BUP , auc_roc: 0.8721358836421599
+
 Running Common_neighbors on BUP
 dataset: BUP , auc_roc: 0.8926907297723197
 
@@ -246,6 +270,9 @@ Running sSalton on BUP
 dataset: BUP , auc_roc: 0.8785478816859571
 
 success - BUP
+Running CNDP on BUP
+dataset: BUP , auc_roc: 0.8441015051893714
+
 Running Common_neighbors on BUP
 dataset: BUP , auc_roc: 0.8544791157238856
 
@@ -277,6 +304,9 @@ Running sSalton on BUP
 dataset: BUP , auc_roc: 0.8544304370664204
 
 success - BUP
+Running CNDP on BUP
+dataset: BUP , auc_roc: 0.8853379883714612
+
 Running Common_neighbors on BUP
 dataset: BUP , auc_roc: 0.8943412758789328
 
@@ -308,4 +338,344 @@ Running sSalton on BUP
 dataset: BUP , auc_roc: 0.8850764820953105
 
 success - BUP
+Running CNDP on CEG
+dataset: CEG , auc_roc: 0.7699684159702384
+
+Running Common_neighbors on CEG
+dataset: CEG , auc_roc: 0.814300367571801
+
+Running Jaccard on CEG
+dataset: CEG , auc_roc: 0.7610446759939122
+
+Running sAA on CEG
+dataset: CEG , auc_roc: 0.8306614568036382
+
+Running sHDI on CEG
+dataset: CEG , auc_roc: 0.7551459774027892
+
+Running sHPI on CEG
+dataset: CEG , auc_roc: 0.7718880997516887
+
+Running sLLHN on CEG
+dataset: CEG , auc_roc: 0.7075178946501838
+
+Running sPA on CEG
+dataset: CEG , auc_roc: 0.739701509224895
+
+Running sRA on CEG
+dataset: CEG , auc_roc: 0.8331239319947669
+
+Running sRandomWalk on CEG
+dataset: CEG , auc_roc: 0.8005635952616168
+
+Running sSalton on CEG
+dataset: CEG , auc_roc: 0.7656143199476677
+
+success - CEG
+Running CNDP on CEG
+dataset: CEG , auc_roc: 0.7780606971849163
+
+Running Common_neighbors on CEG
+dataset: CEG , auc_roc: 0.8341340313192536
+
+Running Jaccard on CEG
+dataset: CEG , auc_roc: 0.7839384806735553
+
+Running sAA on CEG
+dataset: CEG , auc_roc: 0.8539322061428101
+
+Running sHDI on CEG
+dataset: CEG , auc_roc: 0.7749637601349246
+
+Running sHPI on CEG
+dataset: CEG , auc_roc: 0.7997768592191102
+
+Running sLLHN on CEG
+dataset: CEG , auc_roc: 0.7318449679153428
+
+Running sPA on CEG
+dataset: CEG , auc_roc: 0.7547003355316442
+
+Running sRA on CEG
+dataset: CEG , auc_roc: 0.8582626336119047
+
+Running sRandomWalk on CEG
+dataset: CEG , auc_roc: 0.8257541118201479
+
+Running sSalton on CEG
+dataset: CEG , auc_roc: 0.7887954291601029
+
+success - CEG
+Running CNDP on CEG
+dataset: CEG , auc_roc: 0.7812293630238787
+
+Running Common_neighbors on CEG
+dataset: CEG , auc_roc: 0.8409473206418712
+
+Running Jaccard on CEG
+dataset: CEG , auc_roc: 0.7843857078649684
+
+Running sAA on CEG
+dataset: CEG , auc_roc: 0.859148104513212
+
+Running sHDI on CEG
+dataset: CEG , auc_roc: 0.7767539204692102
+
+Running sHPI on CEG
+dataset: CEG , auc_roc: 0.7962924643330752
+
+Running sLLHN on CEG
+dataset: CEG , auc_roc: 0.7276616692921795
+
+Running sPA on CEG
+dataset: CEG , auc_roc: 0.7435928307923708
+
+Running sRA on CEG
+dataset: CEG , auc_roc: 0.862574982867416
+
+Running sRandomWalk on CEG
+dataset: CEG , auc_roc: 0.8246560411271016
+
+Running sSalton on CEG
+dataset: CEG , auc_roc: 0.7881320143468702
+
+success - CEG
+Running CNDP on CEG
+dataset: CEG , auc_roc: 0.779123674036131
+
+Running Common_neighbors on CEG
+dataset: CEG , auc_roc: 0.8309596505994324
+
+Running Jaccard on CEG
+dataset: CEG , auc_roc: 0.781641399645131
+
+Running sAA on CEG
+dataset: CEG , auc_roc: 0.8468563025824795
+
+Running sHDI on CEG
+dataset: CEG , auc_roc: 0.7719604472259467
+
+Running sHPI on CEG
+dataset: CEG , auc_roc: 0.8029694186410604
+
+Running sLLHN on CEG
+dataset: CEG , auc_roc: 0.7387661332480505
+
+Running sPA on CEG
+dataset: CEG , auc_roc: 0.7576050289167396
+
+Running sRA on CEG
+dataset: CEG , auc_roc: 0.8507108363953944
+
+Running sRandomWalk on CEG
+dataset: CEG , auc_roc: 0.8195795386524434
+
+Running sSalton on CEG
+dataset: CEG , auc_roc: 0.7904509860594819
+
+success - CEG
+Running CNDP on CEG
+dataset: CEG , auc_roc: 0.774423867528058
+
+Running Common_neighbors on CEG
+dataset: CEG , auc_roc: 0.8177814977470546
+
+Running Jaccard on CEG
+dataset: CEG , auc_roc: 0.7724546032166583
+
+Running sAA on CEG
+dataset: CEG , auc_roc: 0.8345892690037351
+
+Running sHDI on CEG
+dataset: CEG , auc_roc: 0.7613081044481732
+
+Running sHPI on CEG
+dataset: CEG , auc_roc: 0.7957725994824157
+
+Running sLLHN on CEG
+dataset: CEG , auc_roc: 0.7322671428584172
+
+Running sPA on CEG
+dataset: CEG , auc_roc: 0.7487278675209216
+
+Running sRA on CEG
+dataset: CEG , auc_roc: 0.8379762976849658
+
+Running sRandomWalk on CEG
+dataset: CEG , auc_roc: 0.7915962481835042
+
+Running sSalton on CEG
+dataset: CEG , auc_roc: 0.7828130617309721
+
+success - CEG
+Running CNDP on INF
+dataset: INF , auc_roc: 0.9195726364959129
+
+Running Common_neighbors on INF
+dataset: INF , auc_roc: 0.924952316422688
+
+Running Jaccard on INF
+dataset: INF , auc_roc: 0.9262212170062208
+
+Running sAA on INF
+dataset: INF , auc_roc: 0.9286016824407569
+
+Running sHDI on INF
+dataset: INF , auc_roc: 0.9250446392329233
+
+Running sHPI on INF
+dataset: INF , auc_roc: 0.9239300188860866
+
+Running sLLHN on INF
+dataset: INF , auc_roc: 0.9171401830264307
+
+Running sPA on INF
+dataset: INF , auc_roc: 0.7060410609573649
+
+Running sRA on INF
+dataset: INF , auc_roc: 0.9292296760460725
+
+Running sRandomWalk on INF
+dataset: INF , auc_roc: 0.9513140193285761
+
+Running sSalton on INF
+dataset: INF , auc_roc: 0.9264765627857557
+
+success - INF
+Running CNDP on INF
+dataset: INF , auc_roc: 0.9343896725132947
+
+Running Common_neighbors on INF
+dataset: INF , auc_roc: 0.9387176708468229
+
+Running Jaccard on INF
+dataset: INF , auc_roc: 0.9408691302140809
+
+Running sAA on INF
+dataset: INF , auc_roc: 0.9417514882718027
+
+Running sHDI on INF
+dataset: INF , auc_roc: 0.9400642858481031
+
+Running sHPI on INF
+dataset: INF , auc_roc: 0.9373416717888969
+
+Running sLLHN on INF
+dataset: INF , auc_roc: 0.9309822482382947
+
+Running sPA on INF
+dataset: INF , auc_roc: 0.7038079395609541
+
+Running sRA on INF
+dataset: INF , auc_roc: 0.9421700354437516
+
+Running sRandomWalk on INF
+dataset: INF , auc_roc: 0.9464297646331485
+
+Running sSalton on INF
+dataset: INF , auc_roc: 0.9406806707995408
+
+success - INF
+Running CNDP on INF
+dataset: INF , auc_roc: 0.932916522069601
+
+Running Common_neighbors on INF
+dataset: INF , auc_roc: 0.9374966991723843
+
+Running Jaccard on INF
+dataset: INF , auc_roc: 0.9398836882020393
+
+Running sAA on INF
+dataset: INF , auc_roc: 0.9415145089216018
+
+Running sHDI on INF
+dataset: INF , auc_roc: 0.9391407789596327
+
+Running sHPI on INF
+dataset: INF , auc_roc: 0.9364931918200139
+
+Running sLLHN on INF
+dataset: INF , auc_roc: 0.9309585514184191
+
+Running sPA on INF
+dataset: INF , auc_roc: 0.7053093477653841
+
+Running sRA on INF
+dataset: INF , auc_roc: 0.942029148092077
+
+Running sRandomWalk on INF
+dataset: INF , auc_roc: 0.9569786744233142
+
+Running sSalton on INF
+dataset: INF , auc_roc: 0.9397449530791814
+
+success - INF
+Running CNDP on INF
+dataset: INF , auc_roc: 0.9209683067021968
+
+Running Common_neighbors on INF
+dataset: INF , auc_roc: 0.925398652994698
+
+Running Jaccard on INF
+dataset: INF , auc_roc: 0.927514985311317
+
+Running sAA on INF
+dataset: INF , auc_roc: 0.9282463193541797
+
+Running sHDI on INF
+dataset: INF , auc_roc: 0.9268131133852128
+
+Running sHPI on INF
+dataset: INF , auc_roc: 0.9237920755157988
+
+Running sLLHN on INF
+dataset: INF , auc_roc: 0.9172651461151489
+
+Running sPA on INF
+dataset: INF , auc_roc: 0.708218257858869
+
+Running sRA on INF
+dataset: INF , auc_roc: 0.9281599291124963
+
+Running sRandomWalk on INF
+dataset: INF , auc_roc: 0.9519154167384076
+
+Running sSalton on INF
+dataset: INF , auc_roc: 0.9274073627190254
+
+success - INF
+Running CNDP on INF
+dataset: INF , auc_roc: 0.8998413149426681
+
+Running Common_neighbors on INF
+dataset: INF , auc_roc: 0.9053921026361124
+
+Running Jaccard on INF
+dataset: INF , auc_roc: 0.9082845531972977
+
+Running sAA on INF
+dataset: INF , auc_roc: 0.9098782507576292
+
+Running sHDI on INF
+dataset: INF , auc_roc: 0.907286744233142
+
+Running sHPI on INF
+dataset: INF , auc_roc: 0.9061529099471779
+
+Running sLLHN on INF
+dataset: INF , auc_roc: 0.9011596833346568
+
+Running sPA on INF
+dataset: INF , auc_roc: 0.6882806234282038
+
+Running sRA on INF
+dataset: INF , auc_roc: 0.9109544097718774
+
+Running sRandomWalk on INF
+dataset: INF , auc_roc: 0.9428994402866901
+
+Running sSalton on INF
+dataset: INF , auc_roc: 0.9083827528188623
+
+success - INF
 done

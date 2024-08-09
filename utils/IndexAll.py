@@ -5,16 +5,21 @@
 
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
+import networkx as nx
+from sklearn.preprocessing import Normalizer
+
 
 class IndexAll:
     def __init__(self, matrix):
         self.matrix = matrix
+        self.normal = Normalizer()
 
     # Common neighbors 指标 -- 邻接矩阵中心对称，每一行或每一列代表一个节点的邻居，矩阵运算刚好让
     # n , m 两个节点对应的行列相乘,若非共同节点最后结果为0，反之为1，最后相加即可得到共同邻居数
     def Common_neighbors(self):
-        return np.dot(self.matrix, self.matrix)   # 
-    
+        cn_sim = np.dot(self.matrix, self.matrix)
+        # cn_sim = self.normal.fit_transform(cn_sim)
+        return cn_sim 
 
     def Jaccard(self):
         #计算Jaccard指标
@@ -41,34 +46,8 @@ class IndexAll:
             sim = np.divide(sim, res_sim)
             sim[np.isnan(sim)] = 0  # 将NaN值替换为0
 
+        # sim = self.normal.fit_transform(sim)
         return sim
-            # 将邻接矩阵转换为布尔类型
-        # bool_matrix = self.matrix.astype(bool)
-        # print(bool_matrix)
-        # # 计算Jaccard距离，并转换为相似性
-        # jaccard_distances = pdist(bool_matrix, metric='jaccard')
-        # print(jaccard_distances)
-
-        # jaccard_similarities = 1 - squareform(jaccard_distances)
-        # print(jaccard_similarities)
-        
-        # return jaccard_similarities
-
-        # 将邻接矩阵转换为布尔类型
-        # bool_matrix = self.matrix.astype(bool)
-
-        # # 计算交集
-        # intersection = np.dot(self.matrix, self.matrix)
-
-        # # 计算并集
-        # union = np.bitwise_or(bool_matrix[:, None], bool_matrix[None, :]).sum(axis=0)
-
-        # # print(union)
-
-        # # 计算Jaccard相似性
-        # jaccard_similarities = intersection / union
-
-        # return jaccard_similarities
 
 
     def sSalton(self):
@@ -81,11 +60,12 @@ class IndexAll:
         
         degree = np.sum(self.matrix, axis=1) # 求每个节点的度
         res_mid = np.sqrt(np.outer(degree, degree)) # 求每个节点的度的乘积的开方
-
+                    
         with np.errstate(divide='ignore', invalid='ignore'):
             salton_similarity = np.divide(sim, res_mid)
             salton_similarity[np.isnan(salton_similarity)] = 0  # 将NaN值替换为0
 
+        # salton_similarity = self.normal.fit_transform(salton_similarity)
         return salton_similarity
     
 
@@ -101,7 +81,8 @@ class IndexAll:
         with np.errstate(divide='ignore', invalid='ignore'):
             shpi_similarity = np.divide(sim, res_mid)
             shpi_similarity[np.isnan(shpi_similarity)] = 0
-
+        
+        # shpi_similarity = self.normal.fit_transform(shpi_similarity)s
         return shpi_similarity
     
 
@@ -118,6 +99,7 @@ class IndexAll:
             shdi_similarity = np.divide(sim, res_mid)
             shdi_similarity[np.isnan(shdi_similarity)] = 0
 
+        # shdi_similarity = self.normal.fit_transform(shdi_similarity)s
         return shdi_similarity
     
 
@@ -134,6 +116,7 @@ class IndexAll:
             sllhn_similarity = np.divide(sim, res_mid)
             sllhn_similarity[np.isnan(sllhn_similarity)] = 0
 
+        # sllhn_similarity = self.normal.fit_transform(sllhn_similarity)
         return sllhn_similarity
     
 
@@ -165,6 +148,7 @@ class IndexAll:
                 sAA_similarity[i][j] = sAA_num
                 sAA_similarity[j][i] = sAA_num
         
+        # sAA_similarity = self.normal.fit_transform(sAA_similarity)
         return sAA_similarity
     
     def sRA(self):
@@ -189,6 +173,7 @@ class IndexAll:
                 sRA_similarity[i][j] = sRA_num
                 sRA_similarity[j][i] = sRA_num
         
+        # sRA_similarity = self.normal.fit_transform(sRA_similarity)
         return sRA_similarity
     
 
@@ -201,6 +186,7 @@ class IndexAll:
         degree = np.sum(self.matrix , axis = 1)
         sPA_similarity = np.outer(degree, degree)
 
+        # sPA_similarity = self.normal.fit_transform(sPA_similarity)
         return sPA_similarity
     
 
@@ -229,4 +215,40 @@ class IndexAll:
             
             sim = new_sim
         
+        # sim = self.normal.fit_transform(sim)
         return sim
+    
+    def CNDP(self , bate):
+        num_nodes = self.matrix.shape[0]
+        cndp_sim = np.zeros((num_nodes + 1, num_nodes + 1))
+
+        # 计算聚类系数
+        G = nx.from_numpy_array(self.matrix)
+        cluster_coefficient = nx.clustering(G)
+
+        # print(f"cluster_coefficient: {cluster_coefficient}")
+        average_cluster_coefficient = np.mean(list(cluster_coefficient.values()))
+
+        for i in range(1 , num_nodes):
+            for j in range(i + 1 , num_nodes):
+                common_neighbors = np.where((self.matrix[i] > 0) & (self.matrix[j] > 0))[0]
+                CNDP_value = 0
+                # print(f"{i} , {j} , common_neighbors: {common_neighbors}")
+
+                if len(common_neighbors) == 0:
+                    CNDP_value = 0
+                else:
+                    for node in common_neighbors:
+                        neighbors = np.where(self.matrix[node] > 0)[0]
+
+                        intersection = set(set(neighbors) | set(common_neighbors))
+
+                        # print(f"node: {node} , neighbors: {neighbors} , intersection: {intersection}")
+
+                        CNDP_value += len(intersection) * (len(neighbors) ** (-bate * average_cluster_coefficient))
+                
+                cndp_sim[i][j] = CNDP_value
+                cndp_sim[j][i] = CNDP_value
+        
+        # cndp_sim = self.normal.fit_transform(cndp_sim)
+        return cndp_sim
