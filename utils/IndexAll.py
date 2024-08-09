@@ -152,7 +152,12 @@ class IndexAll:
                 common_neighbors = np.intersect1d(np.where(self.matrix[i] > 0)[0], np.where(self.matrix[j] > 0)[0])
 
                 if(len(common_neighbors) > 0):
-                    sAA_num = np.sum(1 / np.log(degree[common_neighbors]))
+                     with np.errstate(divide='ignore', invalid='ignore'):
+                        sAA_num = np.sum(1 / np.log(degree[common_neighbors]))
+                        # sllhn_similarity[np.isnan(sllhn_similarity)] = 0
+                        if np.isnan(sAA_num):
+                            sAA_num = 0
+                    
                     
                 else:
                     sAA_num = 0
